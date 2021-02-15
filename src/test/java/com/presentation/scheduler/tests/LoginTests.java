@@ -9,7 +9,7 @@ public class LoginTests extends TestBase{
     @Test
     public void loginTest(){
         app.getUser().logIn(new User().withEmail("yuli@telran.com").withPassword("123456yY"));
-       app.getUser().skipSettings();
+      // app.getUser().skipSettings();
        Assert.assertTrue(app.getUser().isLoggedIn());
 
     }
