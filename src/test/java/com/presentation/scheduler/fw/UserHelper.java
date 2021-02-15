@@ -3,6 +3,10 @@ package com.presentation.scheduler.fw;
 import com.presentation.scheduler.model.User;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class UserHelper extends HelperBase{
@@ -12,49 +16,25 @@ public class UserHelper extends HelperBase{
         super(driver);
     }
 
-    public void logIn(String email, String password) throws InterruptedException {
-        //clickOnLoginButton
-        clickByCss("[href='/login']");
-        fillLoginForm(new User().setEmail(email).setPassword(password));
-        pause(2000);
-        clickByCss("[type='submit']");
+    public void logIn(User user)  {
+        type(By.xpath("//*[@resource-id='com.example.svetlana.scheduler:id/log_email_input']"), user.getEmail());
+        type(By.xpath("//*[@resource-id='com.example.svetlana.scheduler:id/log_password_input']"), user.getPassword());
+        driver.hideKeyboard();
+
+        click(By.xpath("//*[@resource-id='com.example.svetlana.scheduler:id/login_btn']"));
     }
 
-    public boolean isRegistrationFormPresent() {
-        return isElementPresent(By.xpath("//h2[contains(.,'Registration')]"));
+    public void skipSettings(){
+        String skipButton = "//*[@resource-id=com.example.svetlana.scheduler:id/wizard_settings_skip_container]";
+        if(isElementPresent(By.xpath(skipButton))){
+            click(By.xpath(skipButton));
+        }
     }
 
-    public void selectCheckBox() {
-        click(By.cssSelector("#check_policy"));
-    }
 
-    public void fillRegistrationForm(User user) {
-        type(By.cssSelector("#first_name"), user.getfName());
-        type(By.cssSelector("#second_name"), user.getlName());
-        System.out.println("email is:" + user.getEmail());
-        type(By.cssSelector("#email"), user.getEmail());
-        type(By.cssSelector("#password"), user.getPassword());
+    public boolean isLoggedIn() {
+        String plusButton = "//*[@resource-id='com.example.svetlana.scheduler:id/fab_main']";
+        new WebDriverWait(driver,15).until(ExpectedConditions.presenceOfElementLocated(By.xpath(plusButton)));
+        return isElementPresent(By.xpath(plusButton));
     }
-
-    public void openRegForm() {
-        click(By.cssSelector("[href='/signup']"));
-    }
-
-    public void fillLoginForm(User user) {
-        typeByCss("[name=email]", user.getEmail());
-        typeByCss("[name=password]", user.getPassword());
-    }
-
-    public void clickLogoutButtonHeader() {
-        click(By.xpath("//a[contains(., 'logOut')]"));
-    }
-
-    public boolean isUserLoggedIn() {
-        return isElementPresent(By.xpath("//a[contains(., 'logOut')]"));
-    }
-
-    public void clickOnLoginButton() {
-        clickByCss("[href='/login']");
-    }
-
 }

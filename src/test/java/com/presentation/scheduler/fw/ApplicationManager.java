@@ -2,6 +2,7 @@ package com.presentation.scheduler.fw;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,9 +42,13 @@ public class ApplicationManager {
 
 
 
-        logger.info("App version: ");
+        logger.info("App version: " + getAppVersion());
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         user = new UserHelper(driver);
+    }
+
+    public String getAppVersion(){
+        return driver.findElement(By.xpath("//*[@resource-id='com.example.svetlana.scheduler:id/app_version_res']")).getText();
     }
 
     // public String setEmail(){
