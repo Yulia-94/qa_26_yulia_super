@@ -18,6 +18,7 @@ public class ApplicationManager {
     UserHelper user;
     Logger logger = LoggerFactory.getLogger(ApplicationManager.class);
     DesiredCapabilities capabilities;
+    EventHelper event;
 
 
     //public ApplicationManager(String browser) {
@@ -45,6 +46,7 @@ public class ApplicationManager {
         logger.info("App version: " + getAppVersion());
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         user = new UserHelper(driver);
+        event = new EventHelper(driver);
     }
 
     public String getAppVersion(){
@@ -69,5 +71,7 @@ public class ApplicationManager {
         return user;
     }
 
-
+    public EventHelper event() {
+        return event;
+    }
 }

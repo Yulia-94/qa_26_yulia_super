@@ -25,16 +25,20 @@ public class UserHelper extends HelperBase{
     }
 
     public void skipSettings(){
-        String skipButton = "//*[@resource-id=com.example.svetlana.scheduler:id/wizard_settings_skip_container]";
+        String skipButton = "//*[@resource-id='com.example.svetlana.scheduler:id/wizard_settings_skip_container']";
         if(isElementPresent(By.xpath(skipButton))){
             click(By.xpath(skipButton));
         }
     }
 
 
-    public boolean isLoggedIn() {
+    public boolean isUserLoggedIn() {
         String plusButton = "//*[@resource-id='com.example.svetlana.scheduler:id/fab_main']";
         new WebDriverWait(driver,15).until(ExpectedConditions.presenceOfElementLocated(By.xpath(plusButton)));
         return isElementPresent(By.xpath(plusButton));
+    }
+
+    public boolean isLoggedIn(){
+        return isElementPresent(By.xpath("//*[@resource-id='com.example.svetlana.scheduler:id/fab_main']"));
     }
 }
