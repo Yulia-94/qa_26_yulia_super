@@ -83,7 +83,7 @@ public class HelperBase {
         int middleY=(upperY + lowerY) /2;
 
         action.longPress(PointOption.point(rightX,middlePoint))
-                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(4)))
+                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(7)))
                 .moveTo(PointOption.point(leftPoint, middleY))
                 .release().perform();
 

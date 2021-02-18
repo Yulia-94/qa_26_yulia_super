@@ -18,7 +18,7 @@ public class EventCreationTest extends TestBase{
     @Test
     public void eventCreationTest(){
         app.event().initCreationNew();
-        app.event().getSelectNextDay();
+       app.event().getSelectNextDay();
         app.event().fillCreationForm(new Event().withType("New Event").withTitle("meeting").withBreaks(2).withAmmout(50));
         app.event().confirmCreation();
       //  app.event().getCount();
